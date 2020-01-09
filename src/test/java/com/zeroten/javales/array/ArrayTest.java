@@ -3,6 +3,7 @@ package com.zeroten.javales.array;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class ArrayTest {
 
@@ -88,5 +89,96 @@ public class ArrayTest {
 
         System.arraycopy(arr2, arr2.length - 3, arr1, arr1.length - 3, 3);
         System.out.println(Arrays.toString(arr1));
+    }
+
+    @Test
+    public void testFull(){
+        int[] arr = new int[10];
+//        for (int i = 0; i < arr.length; i++){
+//            arr[i] = 5;
+//        }
+        Arrays.fill(arr, 5);
+        System.out.println(Arrays.toString(arr));
+
+//        for (int j = arr.length - 3; j < arr.length; j++){
+//            arr[j] = 3;
+//        }
+        Arrays.fill(arr, arr.length - 3, arr.length, 3);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    @Test
+    public void testSort(){
+
+        int[] arr = new int[100];
+        for (int i = 0; i < arr.length; i++){
+            arr[i] = new Random().nextInt(100);
+        }
+        System.out.println(Arrays.toString(arr));
+        Arrays.sort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    @Test
+    public void testDuoWeiArray(){
+        String[][] users = new String[5][];
+        users[0] = new String[4];
+        users[0][0] = "001";
+        users[0][1] = "张三";
+        users[0][2] = "男";
+        users[0][3] = "25";
+
+        users[1] = new String[3];
+        users[1][0] = "002";
+        users[1][1] = "李四";
+        users[1][2] = "女";
+        //users[1][3] = "未知";
+        for (int i = 0; i < users.length; i++){
+            System.out.println(Arrays.toString(users[i]));
+        }
+        for (String[] user : users){
+            System.out.println(Arrays.toString(user));
+        }
+        Arrays.asList(users).forEach(user -> System.out.println(Arrays.toString(user)));
+    }
+
+    public  int[] twoSum(int[] nums, int target){
+        for (int i = 0; i < nums.length - 1; i++){
+            for (int j = i + 1; j < nums.length; j++){
+                if(nums[i] + nums[j] == target){
+                    return new int[] {i, j};
+                }
+            }
+        }
+        return null;
+    }
+
+    public  int[] twoSum2(int[] nums, int target){
+        System.out.println(Arrays.toString(nums));
+        Arrays.sort(nums);
+        System.out.println(Arrays.toString(nums));
+
+        for (int i = 0; i < nums.length - 1; i++){
+            if(nums[i] >= target){
+                return null;
+            }
+            for (int j = i + 1; j < nums.length; j++){
+                if(nums[j] > target){
+                    break;
+                }
+                if(nums[i] + nums[j] == target){
+                    return new int[] {i, j};
+                }
+            }
+        }
+        return null;
+    }
+
+    @Test
+    public void testTwoSum(){
+        int[] intArray = {2, 7, 11, 15};
+        int target = 18;
+        System.out.println(Arrays.toString(twoSum(intArray, target)));
+        System.out.println(Arrays.toString(twoSum2(intArray, target)));
     }
 }
